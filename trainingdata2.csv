@@ -1,3 +1,4 @@
+input,ouput
 "2 123456789010 eni-1235b8ca123456789 172.31.16.139 172.31.16.21 20641 22 6 20 4249 1418530010 1418530070 ACCEPT OK","Accepted and rejected trafficthis is example of default flow log records.In this example, SSH traffic (destination port 22, TCP protocol) from IP address 172.31.16.139 to network interface with private IP address is 172.31.16.21 and ID eni-1235b8ca123456789 in account 123456789010 was allowed."
 "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK","In this example, RDP traffic (destination port 3389, TCP protocol) to network interface eni-1235b8ca123456789 in account 123456789010 was rejected."
 "2 123456789010 eni-1235b8ca123456789 - - - - - - - 1431280876 1431280934 - NODATA","No data and skipped recordsthis is example of default flow log records.In this example, no data was recorded during the aggregation interval."
