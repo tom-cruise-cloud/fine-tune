@@ -50,11 +50,13 @@ training_args = TrainingArguments(
     save_steps=5
 )
 
+data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_dataset,
-    tokenizer=tokenizer
+    tokenizer=tokenizer,
+    data_collator=data_collator
 )
 
 trainer.train()
