@@ -25,6 +25,9 @@ model_name = "Qwen/Qwen2-1.5B"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
+
 def tokenize_function(examples):
     return tokenizer(
             examples["sentence1"],
