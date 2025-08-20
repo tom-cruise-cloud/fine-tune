@@ -7,16 +7,18 @@ def extract_text_from_pdf(pdf_path):
     reader = PdfReader(pdf_path)
     text = ""
     for page in reader.pages:
-        text += page.extract_text() + "\n"
+        text += page.extract_text()
     return text
 
-pdf_text_data = [extract_text_from_pdf(f) for f in pdf_file_paths]
+pdf_text = extract_text_from_pdf("training1.pdf")
 
-model_name = "gpt2"
+data = {"text": [pdf_text]} # Or break it into smaller chunks if it's very long
+dataset = Dataset.from_dict(data)
+# print(dataset[0])
+
+model_name = "bert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-
-# Create a Hugging Face Dataset
-dataset = Dataset.from_dict({"text": pdf_text_data})
+model = AutoModelForMaskedLM.from_pretrained(model_name)
 
 def tokenize_function(examples):
     return tokenizer(examples["text"], return_special_tokens_mask=True)
@@ -42,12 +44,10 @@ data_collator = DataCollatorForLanguageModeling(
     tokenizer=tokenizer, mlm=True, mlm_probability=0.15
 )
 
-model = AutoModelForMaskedLM.from_pretrained(model_name)
-
 training_args = TrainingArguments(
     output_dir="./mlm_results",
     overwrite_output_dir=True,
-    num_train_epochs=3,
+    num_train_epochs=5,
     per_device_train_batch_size=8,
     save_steps=10_000,
     save_total_limit=2,
@@ -61,4 +61,3 @@ trainer = Trainer(
 )
 
 trainer.train()
-
