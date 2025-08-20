@@ -6,12 +6,12 @@ from transformers import AutoModelForCausalLM, TrainingArguments, Trainer
 # Load your dataset
 
 data = [
-  {"prompt": "A sunny day at the beach", "description": "The golden sand stretched endlessly under the warm sun, meeting the gentle lapping waves of the turquoise ocean."},
-  {"prompt": "A bustling city street", "description": "Skyscrapers towered over the crowded sidewalks, filled with the sounds of traffic and chatter, as neon signs glowed in the evening light."}
+  {"prompt": "2 123456789010 eni-1235b8ca123456789 172.31.16.139 172.31.16.21 20641 22 6 20 4249 1418530010 1418530070 ACCEPT OK", "description": "In this example, SSH traffic (destination port 22, TCP protocol) from IP address 172.31.16.139 to network interface with private IP address is 172.31.16.21 and ID eni-1235b8ca123456789 in account 123456789010 was allowed."},
+  {"prompt": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK", "description": "In this example, RDP traffic (destination port 3389, TCP protocol) to network interface eni-1235b8ca123456789 in account 123456789010 was rejected."}
 ]
 
 dataset = Dataset.from_list(data)
-print(dataset)
+# print(dataset)
 # Load a pre-trained tokenizer (e.g., for GPT-2)
 model_name='gpt2'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -41,7 +41,7 @@ training_args = TrainingArguments(
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     # per_device_eval_batch_size=4,
-    num_train_epochs=10,
+    num_train_epochs=12,
     weight_decay=0.01,
     logging_dir="./logs",
 )
