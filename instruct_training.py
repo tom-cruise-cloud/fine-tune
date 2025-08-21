@@ -20,12 +20,12 @@ model_name='Qwen/Qwen2-7B-Instruct'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
-    # torch_dtype="auto",
-    # device_map="auto"
+    torch_dtype="auto",
+    device_map="auto"
 )
 
-# lora_config = LoraConfig(r=8, lora_alpha=16, target_modules=["q_proj", "v_proj"])
-# model = get_peft_model(model, lora_config)
+lora_config = LoraConfig(r=8, lora_alpha=16, target_modules=["q_proj", "v_proj"])
+model = get_peft_model(model, lora_config)
 
 training_args = TrainingArguments(output_dir="./results", num_train_epochs=3)
 trainer = SFTTrainer(
@@ -35,3 +35,5 @@ trainer = SFTTrainer(
     args=training_args,
     formatting_func=lambda x: f"### Instruction:\n{x['instruction']}\n### Output:\n{x['response']}",
 )
+
+trainer.train()
