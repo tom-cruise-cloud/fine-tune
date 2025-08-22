@@ -12,6 +12,9 @@ s3_data_path = sagemaker_session.upload_data(path="path/to/your_data.jsonl", key
 # bucket = sess.default_bucket()
 # s3_training_data_path = f's3://{bucket}/your-data/train.jsonl'
 
+# Define S3 bucket for output
+# output_path = f"s3://your-s3-bucket/sagemaker-llm-training/"
+
 # Configure the HuggingFace Estimator
 huggingface_estimator = HuggingFace(
     entry_point="train.py",
@@ -22,6 +25,7 @@ huggingface_estimator = HuggingFace(
     transformers_version="4.37.2",  # Specify Hugging Face Transformers version
     pytorch_version="2.1.0",      # Specify PyTorch version
     py_version="py310",           # Specify Python version
+    # output_path=output_path,
     hyperparameters={
         "model_name": "gpt2",
         "epochs": 3,
@@ -29,9 +33,7 @@ huggingface_estimator = HuggingFace(
     # hyperparameters={'model_id': 'meta-llama/Llama-2-7b-hf', 'epochs': 5},
     input_mode="File",
     distribution={"smdistributed": {"dataparallel": {"enabled": False}}}, # Adjust for distributed training if needed
-    
 )
-huggingface_estimator.fit({"train": s3_data_path})
 # huggingface_estimator.fit({'training': s3_training_data_path})
 
 # Start the training job
