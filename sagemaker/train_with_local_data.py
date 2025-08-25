@@ -39,3 +39,5 @@ trainer = Trainer(
 )
 
 trainer.train()
+model.save_pretrained("./fine_tuned_model")
+tokenizer.save_pretrained("./fine_tuned_model")
