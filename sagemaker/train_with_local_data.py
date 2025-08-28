@@ -1,3 +1,4 @@
+import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, Trainer, TrainingArguments
 from datasets import Dataset
 
@@ -10,6 +11,10 @@ data = [
 model_name = "Qwen/Qwen2-7B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
+
+# Set the device to CUDA if available, otherwise CPU
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
 
 train_dataset = Dataset.from_dict({"instruction": [d["instruction"] for d in data], "response": [d["response"] for d in data]})
 # print(dataset[0])
