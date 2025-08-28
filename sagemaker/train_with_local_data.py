@@ -8,7 +8,9 @@ data = [
     {"instruction": "2 123456789010 eni-1235b8ca123456789 - - - - - - - 1431280876 1431280934 - NODATA", "response": "No data and skipped recordsthis is example of default flow log records.In this example, no data was recorded during the aggregation interval."},
     {"instruction": "2 123456789010 eni-11111111aaaaaaaaa - - - - - - - 1431280876 1431280934 - SKIPDATA", "response": "VPC Flow Logs skips records when it can't capture flow log data during an aggregation interval because it exceeds internal capacity. A single skipped record can represent multiple flows that were not captured for the network interface during the aggregation interval."}
 ]
-model_name = "Qwen/Qwen2-7B-Instruct"
+
+# model_name = "Qwen/Qwen2-7B-Instruct"
+model_name = "Qwen2.5-3B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
