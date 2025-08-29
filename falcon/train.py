@@ -1,6 +1,9 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
-import transformers
-import torch
+from datasets import load_dataset
+from trl import SFTTrainer
+from datasets import Dataset
+from transformers import AutoTokenizer
+from peft import LoraConfig, get_peft_model
+from transformers import AutoModelForCausalLM, TrainingArguments, Trainer
 
 data = [
     {"instruction": "2 123456789010 eni-1235b8ca123456789 172.31.16.139 172.31.16.21 20641 22 6 20 4249 1418530010 1418530070 ACCEPT OK", "response": "Accepted and rejected trafficthis is example of default flow log records.In this example, SSH traffic (destination port 22, TCP protocol) from IP address 172.31.16.139 to network interface with private IP address is 172.31.16.21 and ID eni-1235b8ca123456789 in account 123456789010 was allowed."},
