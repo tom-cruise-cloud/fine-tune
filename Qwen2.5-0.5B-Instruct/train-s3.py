@@ -1,6 +1,11 @@
 import boto3
 import tarfile
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from datasets import load_dataset
+from trl import SFTTrainer
+from datasets import Dataset
+from transformers import AutoTokenizer
+from peft import LoraConfig, get_peft_model
+from transformers import AutoModelForCausalLM, TrainingArguments, Trainer
 
 data = [
     {"instruction": "version", "response": "The VPC Flow Logs version. If you use the default format, the version is , If you use a custom format, the version is the highest version among the specified fields.  Parquet data type: INT"},
