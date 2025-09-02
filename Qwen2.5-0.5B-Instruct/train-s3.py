@@ -22,7 +22,7 @@ data = [
 
 s3 = boto3.client('s3')
 bucket_name = 'ml-finetune'
-s3_key = 'model.tar.gz'
+s3_key = 'fine-tuned-model/model.tar.gz'
 local_path = 'model.tar.gz'
 
 s3.download_file(bucket_name, s3_key, local_path)
