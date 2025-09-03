@@ -51,7 +51,7 @@ data = [
     {"instruction": "reject-reason", "response": "Reason why traffic was rejected. Possible values: BPA. Returns a '-' for any other reject reason. For more information about VPC Block Public Access (BPA), see Block public access to VPCs and subnets. Parquet data type: STRING"},
 ]
 
-model_name = "fine_tuned_model"
+model_dir = "fine_tuned_model"
 tokenizer = AutoTokenizer.from_pretrained(model_dir)
 model = AutoModelForCausalLM.from_pretrained(model_dir)
 
