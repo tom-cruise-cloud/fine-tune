@@ -1,4 +1,4 @@
-{"instruction":"2, 123456789012, eni-0abcdef1234567890, 10.0.0.10, 172.31.22.145, 54321, 80, 6, 10, 1200, 1678886400, 1678886460, ACCEPT, OK", "response":"version, account-id, interface-id, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action. log-status"}
+{"instruction":"2, 123456789012, eni-0abcdef1234567890, 10.0.0.10, 172.31.22.145, 54321, 80, 6, 10, 1200, 1678886400, 1678886460, ACCEPT, OK", "response":"version, account-id, interface-id, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action. log-status"},
 {"instruction":"version", "response":"The version of the flow log record format (e.g., 2)."},
 {"instruction":"account-id", "response":"The AWS account ID where the VPC is located (e.g., 123456789012)."},
 {"instruction":"interface-id", "response":"The ID of the network interface for which the traffic is logged (e.g., eni-0abcdef1234567890)."},
