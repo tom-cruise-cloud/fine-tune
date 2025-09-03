@@ -1,0 +1,1 @@
+{"instruction":"2, 123456789012, eni-0abcdef1234567890, 10.0.0.10, 172.31.22.145, 54321, 80, 6, 10, 1200, 1678886400, 1678886460, ACCEPT, OK", "response":"version, account-id, interface-id, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action. log-status"}
