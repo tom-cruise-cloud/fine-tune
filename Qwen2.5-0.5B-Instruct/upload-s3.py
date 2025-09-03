@@ -1,3 +1,5 @@
+#tar -czvf model.tar.gz ./fine_tuned_model/
+
 import os
 import sagemaker
 from sagemaker.s3 import S3Uploader
