@@ -34,7 +34,8 @@ data = [
 ]
 
 # model_name = "tiiuae/Falcon3-3B-Instruct"
-model_name = "tiiuae/Falcon3-7B-Instruct"
+# model_name = "tiiuae/Falcon3-7B-Instruct"
+model_dir = "tiiuae/Falcon3-10B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
