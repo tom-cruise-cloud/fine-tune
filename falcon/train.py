@@ -1,5 +1,3 @@
-import boto3
-import tarfile
 from datasets import load_dataset
 from trl import SFTTrainer
 from datasets import Dataset
