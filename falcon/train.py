@@ -6,7 +6,6 @@ from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, TrainingArguments, Trainer
 
 data = [
-    {"instruction":"2, 123456789012, eni-0abcdef1234567890, 10.0.0.10, 172.31.22.145, 54321, 80, 6, 10, 1200, 1678886400, 1678886460, ACCEPT, OK", "response":"version, account-id, interface-id, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action. log-status"},
     {"instruction":"2", "response":"The VPC Flow Logs version."},
     {"instruction":"123456789010", "response":"The AWS account ID."},
     {"instruction":"eni-1234567890abcdef0", "response":"The ID of the network interface."},
@@ -101,6 +100,7 @@ data = [
     {"instruction": "3 eni-22222222222222222 123456789010 vpc-abcdefab012345678 subnet-22222222bbbbbbbbb - 10.40.2.236 10.40.2.31 80 39812 6 19 IPv4 10.40.2.236 10.20.33.164 ACCEPT OK", "response": "this line is the response traffic on eni-22222222222222222, a requester-managed network interface for the transit gateway in subnet subnet-22222222bbbbbbbbb. The dstaddr field displays the private IP address of the transit gateway network interface, and the pkt-dstaddr field displays the IP address of the client in VPC A."},
     {"instruction": "5 52.95.128.179 10.0.0.71 80 34210 6 1616729292 1616729349 IPv4 14 15044 123456789012 vpc-abcdefab012345678 subnet-aaaaaaaa012345678 i-0c50d5961bcb2d47b eni-1235b8ca123456789 ap-southeast-2 apse2-az3 - - ACCEPT 19 52.95.128.179 10.0.0.71 S3 - - ingress OK", "response": "Service name, traffic path, and flow directionthis is an example of the fields for a custom flow log record.version srcaddr dstaddr srcport dstport protocol start end type packets bytes account-id vpc-id subnet-id instance-id interface-id region az-id sublocation-type sublocation-id action tcp-flags pkt-srcaddr pkt-dstaddr pkt-src-aws-service pkt-dst-aws-service traffic-path flow-direction log-statusIn this example, the version is 5 because the records include version 5 fields. An EC2 instance calls the Amazon S3 service. Flow logs are captured on the network interface for the instance. The first record has a flow direction of ingress"},
     {"instruction": "5 10.0.0.71 52.95.128.179 34210 80 6 1616729292 1616729349 IPv4 7 471 123456789012 vpc-abcdefab012345678 subnet-aaaaaaaa012345678 i-0c50d5961bcb2d47b eni-1235b8ca123456789 ap-southeast-2 apse2-az3 - - ACCEPT 3 10.0.0.71 52.95.128.179 - S3 8 egress OK", "response": "this record has a flow direction of egress. For the egress record, traffic-path is 8, indicating that the traffic goes through an internet gateway. The traffic-path field is not supported for ingress traffic. When pkt-srcaddr or pkt-dstaddr is a public IP address, the service name is shown"},
+    {"instruction": "2, 123456789012, eni-0abcdef1234567890, 10.0.0.10, 172.31.22.145, 54321, 80, 6, 10, 1200, 1678886400, 1678886460, ACCEPT, OK", "response":"version, account-id, interface-id, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action. log-status"},
 ]
 
 # model_dir = "Qwen/Qwen2-7B-Instruct"
