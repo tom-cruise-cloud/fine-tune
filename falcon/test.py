@@ -1,4 +1,5 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import evaluate
 
 model_name='./fine_tuned_model_v1/'
 # model_name='./results/checkpoint-5'
@@ -13,6 +14,7 @@ if tokenizer.pad_token is None:
     tokenizer.pad_token = tokenizer.eos_token
 
 prompt = "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK"
+reference = "In this example, RDP traffic (destination port 3389, TCP protocol) to network interface eni-1235b8ca123456789 in account 123456789010 was rejected."
 messages = [
     {"role": "user", "content": prompt}
 ]
@@ -47,3 +49,14 @@ generated_ids = model.generate(
 
 response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
 print("response: " + response)
+
+# The 'evaluate' library expects predictions and references as lists
+# Example using ROUGE for text generation evaluation
+rouge = evaluate.load("rouge")
+rouge_result = rouge.compute(response, reference)
+print("Rouge Result: ", rouge_result)
+
+# Example using accuracy for a hypothetical classification task (requires adjustments to generate_response)
+accuracy = evaluate.load("accuracy")
+accuracy_result = accuracy(response, reference)
+print("Accuracy Results: ", accuracy_result)
