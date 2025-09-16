@@ -1,7 +1,6 @@
 from datasets import load_dataset
 from trl import SFTTrainer
 from datasets import Dataset
-from datasets import load_dataset, load_metric
 from transformers import AutoTokenizer
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, TrainingArguments, Trainer
@@ -112,9 +111,6 @@ data = [
     {"instruction": "2, 123456789012, eni-0abcdef1234567890, 10.0.0.10, 172.31.22.145, 54321, 80, 6, 10, 1200, 1678886400, 1678886460, ACCEPT, OK", "response":"version, account-id, interface-id, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action. log-status"},
 ]
 
-eval = [
-    {"instruction": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK", "response": "In this example, RDP traffic (destination port 3389, TCP protocol) to network interface eni-1235b8ca123456789 in account 123456789010 was rejected."},
-]
 # model_dir = "Qwen/Qwen2-7B-Instruct"
 # model_dir = "tiiuae/Falcon3-7B-Instruct"
 model_dir = "tiiuae/Falcon3-10B-Instruct"
@@ -129,7 +125,7 @@ model = get_peft_model(model, lora_config)
 # model.to(device)
 
 train_dataset = Dataset.from_dict({"instruction": [d["instruction"] for d in data], "response": [d["response"] for d in data]})
-eval_dataset = Dataset.from_dict({"instruction": [d["instruction"] for d in eval], "response": [d["response"] for d in eval]})
+
 # print(dataset[0])
 # Convert to Hugging Face Dataset
 
@@ -141,22 +137,18 @@ def tokenize_function(examples):
     return tokenizer(examples["instruction"], text_target=examples["response"], truncation=True, padding='max_length', max_length=512)
 
 tokenized_train_dataset = train_dataset.map(tokenize_function, batched=True)
-tokenized_eval_dataset = eval_dataset.map(tokenize_function, batched=True)
+
 # print(tokenized_train_dataset[0])
 
 training_args = TrainingArguments(
     output_dir="./results", 
     num_train_epochs=3,
-    eval_strategy="epoch", # Evaluate at the end of each epoch
-    save_strategy="epoch",
-    load_best_model_at_end=True,
-    metric_for_best_model="eval_loss",
-)# Metric to monitor for best model saving)
+)
+
 trainer = SFTTrainer(
     model=model,
     processing_class=tokenizer,
     train_dataset=tokenized_train_dataset,
-    eval_dataset=tokenized_eval_dataset,
     args=training_args,
     # formatting_func=lambda x: f"### Instruction:\n{x['instruction']}\n### Output:\n{x['response']}",
 )
