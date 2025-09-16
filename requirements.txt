@@ -6,3 +6,4 @@ PyPDF2
 trl
 peft
 protobuf
+evaluate
