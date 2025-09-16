@@ -1,6 +1,7 @@
 from datasets import load_dataset
 from trl import SFTTrainer
-from datasets import Dataset, load_metric
+from datasets import Dataset
+from datasets import load_dataset, load_metric
 from transformers import AutoTokenizer
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, TrainingArguments, Trainer
