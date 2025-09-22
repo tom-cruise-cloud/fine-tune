@@ -34,7 +34,7 @@ pipeline = pipeline(
 test_data = [
     {
         "instruction": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK", 
-        "response": "In this example, RDP traffic (destination port 3389, TCP protocol) to network interface eni-1235b8ca123456789 in account 123456789010 was rejected."
+        "response": "RDP traffic (destination port 3389, TCP protocol) to network interface eni-1235b8ca123456789 in account 123456789010 was rejected."
     },
 ]
 # 3. Generate predictions and evaluate
@@ -48,7 +48,7 @@ for item in test_data:
 
     sequences = pipeline(
     prompt,
-    max_length=512,
+    max_length=1024,
     do_sample=True,
     top_k=10,
     num_return_sequences=1,
@@ -59,7 +59,6 @@ for item in test_data:
     
     print(f"Prompt: {prompt}\n")
     print(f"Generated: {generated_text}\n")
-    print("-" * 50)
 
 rouge = evaluate.load("rouge")
 results = rouge.compute(predictions=predictions, references=references)
