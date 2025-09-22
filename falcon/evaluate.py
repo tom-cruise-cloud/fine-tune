@@ -65,4 +65,15 @@ for item in test_data:
 rouge = evaluate.load("rouge")
 results = rouge.compute(predictions=predictions, references=references)
 
+print("\n--- Automated Evaluation Results (ROUGE) ---")
+print(results)
+
+# 5. Conduct human evaluation (optional but recommended)
+print("\n--- Human Evaluation ---")
+print("Examine the generated text above and answer the following questions for each response:")
+print("- **Relevance:** Does the response directly answer the prompt?")
+print("- **Correctness:** Is the information factually accurate?")
+print("- **Fluency:** Is the response well-written and easy to read?")
+print("- **Instruction-Following:** Does it follow any specific instructions given in the prompt?")
+
 
