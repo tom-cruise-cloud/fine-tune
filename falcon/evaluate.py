@@ -49,7 +49,7 @@ for item in test_data:
 
     sequences = pipeline(
     prompt,
-    max_length=150,
+    max_length=512,
     do_sample=True,
     top_k=10,
     num_return_sequences=1,
