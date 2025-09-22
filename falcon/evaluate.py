@@ -1,15 +1,26 @@
 from datasets import Dataset
+from datasets import load_dataset
+from transformers import AutoTokenizer, pipeline
+from peft import PeftModel
+import torch
 import evaluate
+
+test_data = [
+    {
+        "prompt": "What are the main benefits of a balanced diet?",
+        "reference": "A balanced diet provides essential nutrients, improves energy levels, and supports a healthy immune system."
+    },
+]
+
+# 3. Generate predictions and evaluate
+predictions = []
+references = []
 
 prompts = [
     "What is the capital of France?",
-    "Explain the concept of photosynthesis.",
-    "Write a short poem about nature."
 ]
 references = [
     "Paris",
-    "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods from carbon dioxide and water.",
-    "Green leaves dance in gentle breeze,\nSunlight warms the ancient trees,\nRivers flow with whispered pleas,\nNature's beauty brings us ease."
 ]
 
 eval_dataset = Dataset.from_dict({"prompt": prompts, "reference": references})
