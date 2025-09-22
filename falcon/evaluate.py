@@ -47,12 +47,12 @@ for item in test_data:
     references.append(reference)
 
     sequences = pipeline(
-    prompt,
-    max_length=1024,
-    do_sample=True,
-    top_k=10,
-    num_return_sequences=1,
-    eos_token_id=tokenizer.eos_token_id,
+        prompt,
+        max_length=1024,
+        do_sample=True,
+        top_k=10,
+        num_return_sequences=1,
+        eos_token_id=tokenizer.eos_token_id,
     )
     generated_text = sequences[0]['generated_text'].split(prompt)[-1].strip()
     predictions.append(generated_text)
