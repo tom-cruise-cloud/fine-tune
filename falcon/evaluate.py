@@ -5,7 +5,7 @@ from peft import PeftModel
 import torch
 import evaluate
 
-model_path = "your_local_model_path"
+model_path = "./fine_tuned_model_v1/"
 base_model_id = "tiiuae/falcon3-10b-instruct" # The base model you used for fine-tuning
 
 # Load the base model
