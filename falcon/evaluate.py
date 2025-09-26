@@ -1,77 +1,70 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-from peft import PeftModel
-import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from bert_score import score
 import evaluate
 
-model_path = "./fine_tuned_model_v1/"
-base_model_id = "tiiuae/falcon3-10B-instruct" # The base model you used for fine-tuning
-
-# Load the base model
-base_model = AutoModelForCausalLM.from_pretrained(
-    base_model_id,
-    torch_dtype=torch.bfloat16,
-    device_map="auto",
-    trust_remote_code=True
+model_name='./fine_tuned_model_v1/'
+# model_nmae = "tiiuae/Falcon3-10B-Instruct"
+# model_name='./results/checkpoint-5'
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    torch_dtype="auto",
+    # device_map="auto"
 )
 
-# Load the PEFT adapter
-model = PeftModel.from_pretrained(base_model, model_path)
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
 
-# Merge the adapter with the base model for inference
-model = model.merge_and_unload()
-
-# Load the tokenizer
-tokenizer = AutoTokenizer.from_pretrained(base_model_id, trust_remote_code=True)
-
-pipeline = pipeline(
-    "text-generation",
-    model=model,
-    tokenizer=tokenizer,
-    torch_dtype=torch.bfloat16,
-    device_map="auto"
-)
-
-test_data = [
-    {
-        "instruction": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK", 
-        "response": "RDP traffic (destination port 3389, TCP protocol) to network interface eni-1235b8ca123456789 in account 123456789010 was rejected."
-    },
+prompt = "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK"
+# prompt = "2 123456789010 eni-1235b8ca123456789 - - - - - - - 1431280876 1431280934 - NODATA"
+reference = "RDP traffic (destination port 3389, TCP protocol) to network interface eni-1235b8ca123456789 in account 123456789010 was rejected."
+messages = [
+    {"role": "user", "content": prompt}
 ]
-# 3. Generate predictions and evaluate
-predictions = []
-references = []
 
-for item in test_data:
-    prompt = item["instruction"]
-    reference = item["response"]
-    references.append(reference)
+text = tokenizer.apply_chat_template(
+    messages,
+    tokenize=False,
+    add_generation_prompt=True
+)
+model_inputs = tokenizer([text], return_tensors="pt")
+# print(model_inputs.input_ids)
 
-    sequences = pipeline(
-        prompt,
-        max_length=1024,
-        do_sample=True,
-        top_k=10,
-        num_return_sequences=1,
-        eos_token_id=tokenizer.eos_token_id,
-    )
-    generated_text = sequences[0]['generated_text'].split(prompt)[-1].strip()
-    predictions.append(generated_text)
-    
-    print(f"Prompt: {prompt}\n")
-    print(f"Generated: {generated_text}\n")
+# generated_text = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+# print(generated_text)
 
-rouge = evaluate.load("rouge")
-results = rouge.compute(predictions=predictions, references=references)
+generated_ids = model.generate(
+    model_inputs.input_ids,
+    attention_mask=model_inputs['attention_mask'],
+    pad_token_id=tokenizer.eos_token_id, 
+    max_new_tokens=1024,
+    do_sample=True,
+    top_k=50,
+    top_p=0.95,
+    temperature=0.85,
+)
+# print(generated_ids)
 
-print("\n--- Automated Evaluation Results (ROUGE) ---")
-print(results)
+# generated_ids = [
+#     output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+# ]
+# print(generated_ids)
 
-# 5. Conduct human evaluation (optional but recommended)
-print("\n--- Human Evaluation ---")
-print("Examine the generated text above and answer the following questions for each response:")
-print("- **Relevance:** Does the response directly answer the prompt?")
-print("- **Correctness:** Is the information factually accurate?")
-print("- **Fluency:** Is the response well-written and easy to read?")
-print("- **Instruction-Following:** Does it follow any specific instructions given in the prompt?")
+response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+print("response: " + response)
 
+# The 'evaluate' library expects predictions and references as lists
+# Example using ROUGE for text generation evaluation
+# rouge_metric = evaluate.load("rouge")
+# rouge_result = rouge_metric.compute(predictions=response, references=reference)
+# print("Rouge Result: ", rouge_result)
 
+# # Example using accuracy for a hypothetical classification task (requires adjustments to generate_response)
+# accuracy_metric = evaluate.load("accuracy")
+# accuracy_result = accuracy_metric(response, reference)
+# print("Accuracy Results: ", accuracy_result)
+
+print("\n")
+print(f"Evaluating...")
+P, R, F1 = score([response], [reference], lang="en", verbose=True)
+print(f"Precision: {P.mean():.4f}, Recall: {R.mean():.4f}, F1: {F1.mean():.4f}")
