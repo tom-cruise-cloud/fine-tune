@@ -1,0 +1,33 @@
+from sagemaker.predictor import retrieve_default
+
+endpoint_name = "jumpstart-dft-hf-llm-falcon-3-10b-i-20250926-144543"
+predictor = retrieve_default(endpoint_name)
+
+payload = {
+    "inputs": "What is deep learning?",
+    "parameters": {
+        "max_new_tokens": 256,
+        "do_sample": True
+    }
+}
+response = predictor.predict(payload)
+print(response)
+
+```
+    do_sample: If True, activates logits sampling. If specified, it must be boolean.
+    max_new_tokens: Maximum number of generated tokens. If specified, it must be a positive integer.
+    repetition_penalty: A penalty for repetitive generated text. 1.0 means no penalty.
+    return_full_text: If True, input text will be part of the output generated text. If specified, it must be boolean. The default value for it is False.
+    stop: If specified, it must a list of strings. Text generation stops if any one of the specified strings is generated.
+    seed: Random sampling seed.
+    temperature: Controls the randomness in the output. Higher temperature results in output sequence with low-probability words and lower temperature results in output sequence with high-probability words. If temperature -> 0, it results in greedy decoding. If specified, it must be a positive float.
+    top_k: In each step of text generation, sample from only the top_k most likely words. If specified, it must be a positive integer.
+    top_p: In each step of text generation, sample from the smallest possible set of words with cumulative probability top_p. If specified, it must be a float between 0 and 1.
+    truncate: Truncate inputs tokens to the given size.
+    typical_p: Typical decoding mass, according to Typical Decoding for Natural Language Generation.
+    best_of: Generate best_of sequences and return the one if the highest token logprobs.
+    watermark: Whether to perform watermarking with A Watermark for Large Language Models.
+    details: Return generation details, to include output token logprobs and IDs.
+    decoder_input_details: Return decoder input token logprobs and IDs.
+    top_n_tokens: Return the N most likely tokens at each step.
+```
