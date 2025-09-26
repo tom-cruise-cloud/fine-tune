@@ -2,8 +2,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel, PeftConfig
 
 MODEL_NAME = 'tiiuae/Falcon3-10B-Instruct'
-ADAPTER_PATH = './fine_tuned_model_v1/adapter_model.safetensors'
-
+# ADAPTER_PATH = './fine_tuned_model_v1/adapter_model.safetensor'
+ADAPTER_PATH = './fine_tuned_model_v1'
 # Load base model
 model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True, device_map='auto')
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
