@@ -1,4 +1,5 @@
 #tar -czvf falcon.model.tar.gz ./fine_tuned_model_v1/
+#tar -czvf falcon.model.tar.gz ./inference.py ./requirements.txt ./fine_tuned_model_v1/
 
 import os
 import sagemaker
