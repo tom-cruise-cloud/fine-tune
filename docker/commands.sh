@@ -48,4 +48,4 @@ latest: digest: sha256:2f142d6868f81ade85eabce64dcdcdc0e840c58e6db2373295fa11391
 
 https://github.com/aws/sagemaker-pytorch-inference-toolkit
 
-
+https://github.com/aws/amazon-sagemaker-examples/blob/main/advanced_functionality/multi_model_bring_your_own/container/Dockerfile
