@@ -1,4 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import flask
+import json
+import os
 
 model_name='./fine_tuned_model_v1/'
 # model_nmae = "tiiuae/Falcon3-10B-Instruct"
@@ -39,3 +42,35 @@ generated_ids = model.generate(
 
 response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
 print("response: " + response)
+
+# Flask app for handling requests
+app = flask.Flask(__name__)
+
+@app.route('/ping', methods=['GET'])
+def ping():
+    """
+    Health check endpoint.
+    """
+    # Check if the model is loaded
+    health = model_name is not None
+    status = 200 if health else 404
+    return flask.Response(response='\n', status=status, mimetype='application/json')
+
+@app.route('/invocations', methods=['POST'])
+def invocations():
+    """
+    Inference endpoint.
+    """
+    request_content_type = flask.request.content_type
+    accept_header = flask.request.headers.get('Accept', 'application/json')
+
+    try:
+        input_data = input_fn(flask.request.data, request_content_type)
+        prediction = predict_fn(input_data, model)
+        return output_fn(prediction, accept_header)
+    except Exception as e:
+        return flask.Response(response=str(e), status=500, mimetype='text/plain')
+
+# Initialize the model when the application starts
+with app.app_context():
+    model_name='./fine_tuned_model_v1/' # SageMaker mounts model artifacts here
