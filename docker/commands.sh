@@ -45,3 +45,7 @@ bd831d67c76e: Pushed
 ae2d55769c5e: Pushed 
 e2ef8a51359d: Pushed 
 latest: digest: sha256:2f142d6868f81ade85eabce64dcdcdc0e840c58e6db2373295fa11391fd3ed59 size: 2417
+
+https://github.com/aws/sagemaker-pytorch-inference-toolkit
+
+
