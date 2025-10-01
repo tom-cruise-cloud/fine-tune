@@ -143,6 +143,9 @@ tokenized_train_dataset = train_dataset.map(tokenize_function, batched=True)
 training_args = TrainingArguments(
     output_dir="./results", 
     num_train_epochs=3,
+    per_device_train_batch_size=10
+    save_strategy="steps",   # Save checkpoint every 'save_steps'
+    save_steps=10,        
 )
 
 trainer = SFTTrainer(
