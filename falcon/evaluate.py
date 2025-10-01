@@ -1,9 +1,8 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from bert_score import score
-import evaluate
 
 model_name='./fine_tuned_model_v1/'
-# model_nmae = "tiiuae/Falcon3-10B-Instruct"
+# model_name = "tiiuae/Falcon3-10B-Instruct"
 # model_name='./results/checkpoint-5'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
