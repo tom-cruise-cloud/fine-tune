@@ -1,0 +1,9 @@
+transformers>=4.37.0
+datasets
+torch
+accelerate
+trl
+peft
+protobuf
+evaluate==0.4.0
+bert_score
