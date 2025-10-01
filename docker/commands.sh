@@ -49,3 +49,39 @@ latest: digest: sha256:2f142d6868f81ade85eabce64dcdcdc0e840c58e6db2373295fa11391
 https://github.com/aws/sagemaker-pytorch-inference-toolkit
 
 https://github.com/aws/amazon-sagemaker-examples/blob/main/advanced_functionality/multi_model_bring_your_own/container/Dockerfile
+
+
+(.fine_tune) PS D:\Users\yan.gong\.fine_tune> flask --app web.py run --host=0.0.0.0 --port=8080
+ * Serving Flask app 'web.py'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.17.8.189:8080
+Press CTRL+C to quit
+127.0.0.1 - - [01/Oct/2025 10:51:58] "POST /api/data HTTP/1.1" 200 -
+127.0.0.1 - - [01/Oct/2025 10:56:14] "POST /api/data HTTP/1.1" 200 -
+
+
+PS D:\Users\yan.gong> Invoke-WebRequest -Uri http://127.0.0.1:8080/api/data -Method Post -ContentType "application/json" -body '{"role": "user", "content": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK"}'
+
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : {"content":"2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK","role":"user"}
+
+RawContent        : HTTP/1.1 200 OK
+                    Connection: close
+                    Content-Length: 142
+                    Content-Type: application/json
+                    Date: Wed, 01 Oct 2025 14:57:06 GMT
+                    Server: Werkzeug/3.1.3 Python/3.13.5
+
+                    {"content":"2 123456789010 eni-123...
+Forms             : {}
+Headers           : {[Connection, close], [Content-Length, 142], [Content-Type, application/json], [Date, Wed, 01 Oct 2025 14:57:06 GMT]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : System.__ComObject
+RawContentLength  : 142
