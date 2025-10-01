@@ -1,7 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
-import flask
+from flask import Flask, request
 import json
-import os
 
 # model_name='./fine_tuned_model_v1/'
 # tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -66,13 +65,10 @@ def invocations():
 
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    
-    """
-    Inference endpoint.
-    """
+        
     # request_content_type = flask.request.content_type
     # accept_header = flask.request.headers.get('Accept', 'application/json')
-    input_data = flask.request.get_data().decode("utf-8")
+    input_data = request.get_data().decode("utf-8")
     # Process input data (e.g., JSON parsing, data transformation)
     # Example:
     data = json.loads(input_data)
@@ -96,7 +92,7 @@ def invocations():
     )
 
     response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
-    print("response: " + response)
+    # print("response: " + response)
     return response
     
     # try:
