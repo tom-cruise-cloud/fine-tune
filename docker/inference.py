@@ -41,7 +41,7 @@ import json
 # print("response: " + response)
 
 # Flask app for handling requests
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/ping', methods=['GET'])
 def ping():
@@ -51,7 +51,7 @@ def ping():
     # Check if the model is loaded
     health = model_name is not None
     status = 200 if health else 404
-    return flask.Response(response='\n', status=status, mimetype='application/json')
+    return Response(response='\n', status=status, mimetype='application/json')
 
 @app.route('/invocations', methods=['POST'])
 def invocations():
