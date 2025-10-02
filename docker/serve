@@ -1,4 +1,6 @@
 #!/bin/bash
 
+# Start nginx in the background
+# sudo nginx &
 # Start Gunicorn server
-exec gunicorn --bind 0.0.0.0:8080 wsgi:application
+# exec gunicorn --bind 0.0.0.0:8080 wsgi:application
