@@ -9,3 +9,4 @@ Flask
 request
 json
 gunicorn
+nginx
