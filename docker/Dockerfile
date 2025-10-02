@@ -1,5 +1,11 @@
 FROM python:3.9-slim-buster
 
+RUN apt-get update && apt-get install -y \
+    nginx \
+    gunicorn \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
 # Set environment variables (optional, but good practice)
 ENV PYTHONUNBUFFERED 1
 ENV APP_HOME /app
