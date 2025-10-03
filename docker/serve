@@ -5,10 +5,10 @@
 # Start Gunicorn server
 # exec gunicorn --timeout 300 --bind 0.0.0.0:8080 wsgi:application
 
-set -e
+# set -e
 
 # Start Gunicorn in the background
-exec gunicorn --timeout 300 --bind unix:/tmp/gunicorn.sock -w 1 wsgi:app &
+exec gunicorn --timeout 300 --log-level=debug --bind unix:/tmp/gunicorn.sock -w 1 wsgi:app &
 
 # Start Nginx
 # exec nginx -c /etc/nginx/nginx.conf
