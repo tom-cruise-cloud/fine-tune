@@ -5,7 +5,7 @@ accelerate
 trl
 peft
 protobuf
-Flask
+flask
 request
 json
 gunicorn
