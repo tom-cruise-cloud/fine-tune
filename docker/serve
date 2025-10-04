@@ -10,7 +10,10 @@
 # Start Gunicorn in the background
 # exec gunicorn --timeout 300 --log-level=debug --bind unix:/tmp/gunicorn.sock -w 1 wsgi:app &
 
-exec gunicorn --timeout 300 --log-level=debug --bind 0.0.0.0:8080 wsgi:app
+WORKERS=$((2 * $(nproc) + 1))
+echo "Starting Gunicorn with $WORKERS workers."
+
+exec gunicorn --workers "$WORKERS" --timeout 300 --graceful-timeout 300 --log-level=debug --bind 0.0.0.0:8080 wsgi:app
 
 # Start Nginx
 # exec nginx -c /etc/nginx/nginx.conf
