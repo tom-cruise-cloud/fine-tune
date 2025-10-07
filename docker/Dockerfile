@@ -10,10 +10,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # # Copy your inference script and model files
 COPY inference.py ./
-COPY serve ./
 COPY wsgi.py ./
+COPY serve /usr/local/bin/
 COPY ./fine_tuned_model_v1/ ./fine_tuned_model_v1/
 
 EXPOSE 8080
 
-CMD ["./serve"]
+CMD ["serve"]
