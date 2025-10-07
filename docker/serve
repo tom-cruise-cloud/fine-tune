@@ -1,21 +1,7 @@
 #!/bin/bash
 
-# Start nginx in the background
-# sudo nginx &
-# Start Gunicorn server
-# exec gunicorn --timeout 300 --bind 0.0.0.0:8080 wsgi:application
+WORKERS=$(nproc)
 
-# set -e
-
-# Start Gunicorn in the background
-# exec gunicorn --timeout 300 --log-level=debug --bind unix:/tmp/gunicorn.sock -w 1 wsgi:app &
-
-WORKERS=$((2 * $(nproc) + 1))
 echo "Starting Gunicorn with $WORKERS workers."
 
 exec gunicorn --workers "$WORKERS" --timeout 300 --graceful-timeout 300 --log-level=debug --bind 0.0.0.0:8080 wsgi:app
-
-# Start Nginx
-# exec nginx -c /etc/nginx/nginx.conf
-# sudo nginx -c /etc/nginx/nginx.conf
-# exec nginx -c ./nginx.conf
