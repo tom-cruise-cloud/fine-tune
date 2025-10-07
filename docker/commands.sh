@@ -18,6 +18,8 @@ REPOSITORY                                                           TAG       I
 837369895783.dkr.ecr.us-east-1.amazonaws.com/falcon3-10b-inference   latest    1086e125886f   35 minutes ago   7.4GB
 falcon3-10b-inference                                                latest    1086e125886f   35 minutes ago   7.4GB
 
+Add permission to the role: arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicFullAccess
+OR:
 {
     "Version": "2012-10-17",
     "Statement": [
