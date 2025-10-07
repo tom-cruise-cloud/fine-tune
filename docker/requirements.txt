@@ -2,10 +2,9 @@ transformers>=4.37.0
 datasets
 torch
 accelerate
-trl
-peft
+trl==0.23.1
+peft==0.17.1
 protobuf
-flask
-request
-json
+Flask
+requests
 gunicorn
