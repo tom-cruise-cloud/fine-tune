@@ -1,5 +1,7 @@
 docker build --network sagemaker -t falcon3-10b-inference .
 
+docker run --network sagemaker falcon3-10b-inference
+
 sagemaker-user@default:~$ docker rmi 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:latest
 Untagged: 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:latest
 
