@@ -101,3 +101,6 @@ curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8080/ping
 sudo kill -9 $(pidof nginx)
 
 aws console - sagemaker ai - inference - serverless
+
+ml instance details: 
+https://aws.amazon.com/sagemaker/ai/pricing/
