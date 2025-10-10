@@ -104,3 +104,8 @@ aws console - sagemaker ai - inference - serverless
 
 ml instance details: 
 https://aws.amazon.com/sagemaker/ai/pricing/
+
+Async invocation config
+
+curl -X POST -H "Content-Type: application/json" https://runtime.sagemaker.us-east-1.amazonaws.com/endpoints/falcon3-7b/invocations -d '{"role": "user", "content": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK"}'
+{"message":"Missing Authentication Token"}
