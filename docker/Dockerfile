@@ -1,6 +1,7 @@
 # Use a Python 3.10 base image
 FROM python:3.10-slim-buster
 
+ENV SAGEMAKER_MODEL_SERVER_TIMEOUT=300
 # Set the working directory
 WORKDIR /app
 
