@@ -4,6 +4,9 @@ from datasets import Dataset
 from transformers import AutoTokenizer
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, TrainingArguments, Trainer
+import os
+
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 data = [
     {"instruction":"2", "response":"version"},
