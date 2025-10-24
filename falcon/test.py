@@ -1,5 +1,5 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
-import evaluate
+# import evaluate
 
 model_name='./fine_tuned_model_v1/'
 # model_name='./results/checkpoint-5'
@@ -47,21 +47,21 @@ generated_ids = model.generate(
 # ]
 # print(generated_ids)
 
-predictions = []
+# predictions = []
 references = []
 
 response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
 print("response: " + response)
-predictions.append(response)
-references.append(reference)
+# predictions.append(response)
+# references.append(reference)
 
 # The 'evaluate' library expects predictions and references as lists
 # Example using ROUGE for text generation evaluation
-rouge_metric = evaluate.load("rouge")
-rouge_result = rouge_metric.compute(predictions=predictions, references=references)
-print("Rouge Result: ", rouge_result)
+# rouge_metric = evaluate.load("rouge")
+# rouge_result = rouge_metric.compute(predictions=predictions, references=references)
+# print("Rouge Result: ", rouge_result)
 
 # Example using accuracy for a hypothetical classification task (requires adjustments to generate_response)
-accuracy_metric = evaluate.load("accuracy")
-accuracy_result = accuracy_metric.compute(predictions=predictions, references=references)
-print("Accuracy Results: ", accuracy_result)
+# accuracy_metric = evaluate.load("accuracy")
+# accuracy_result = accuracy_metric.compute(predictions=predictions, references=references)
+# print("Accuracy Results: ", accuracy_result)
