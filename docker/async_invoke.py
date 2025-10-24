@@ -16,5 +16,6 @@ response = sm_runtime.invoke_endpoint_async(
     # Optionally, specify an S3 location for output if not already configured in endpoint
     # ExpectedOutputLocation=f"s3://{default_bucket}/{output_prefix}/"
 )
+print(response)
 # output_location = response["OutputLocation"]
-print(f"Asynchronous invocation successful")
+# print(f"Asynchronous invocation successful")
