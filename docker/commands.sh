@@ -113,3 +113,5 @@ Async invocation config
 
 curl -X POST -H "Content-Type: application/json" https://runtime.sagemaker.us-east-1.amazonaws.com/endpoints/falcon3-7b/invocations -d '{"role": "user", "content": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK"}'
 {"message":"Missing Authentication Token"}
+
+2025-10-24T20:46:13.202:[sagemaker logs] [fec57d59-d97c-4d50-850a-f47bf6b4edc1] Failed to download object (bucket: ml-finetune, key: fine-tuned-model/input.json). Please ensure that an S3 VPC endpoint exists in route table or NAT gateway for the VPC mode and the URL is reachable from within the subnets provided.
