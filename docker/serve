@@ -4,4 +4,6 @@ WORKERS=$(nproc)
 
 echo "Starting Gunicorn with $WORKERS workers."
 
-exec gunicorn --workers "$WORKERS" --timeout 300 --graceful-timeout 300 --log-level=debug --bind 0.0.0.0:8080 wsgi:app
+# exec gunicorn --workers "$WORKERS" --timeout 300 --graceful-timeout 300 --log-level=debug --bind 0.0.0.0:8080 wsgi:app
+
+exec gunicorn --workers 1 --timeout 300 --graceful-timeout 300 --log-level=debug --bind 0.0.0.0:8080 wsgi:app
