@@ -115,8 +115,8 @@ data = [
 ]
 
 # model_dir = "Qwen/Qwen2-7B-Instruct"
-# model_dir = "tiiuae/Falcon3-7B-Instruct"
-model_dir = "tiiuae/Falcon3-10B-Instruct"
+model_dir = "tiiuae/Falcon3-7B-Instruct"
+# model_dir = "tiiuae/Falcon3-10B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_dir)
 model = AutoModelForCausalLM.from_pretrained(model_dir)
 
