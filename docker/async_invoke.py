@@ -12,6 +12,7 @@ s3_input_location = "s3://ml-finetune/fine-tuned-model/input.json"
 response = sm_runtime.invoke_endpoint_async(
     EndpointName=endpoint_name,
     InputLocation=s3_input_location,
+    ContentType="Application/Json",
     # Optionally, specify an S3 location for output if not already configured in endpoint
     # ExpectedOutputLocation=f"s3://{default_bucket}/{output_prefix}/"
 )
