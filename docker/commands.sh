@@ -6,6 +6,7 @@ docker rmi 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:lates
 Untagged: 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:latest
 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 837369895783.dkr.ecr.us-east-1.amazonaws.com
+
 WARNING! Your password will be stored unencrypted in /home/sagemaker-user/.docker/config.json.
 Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credential-stores
@@ -13,7 +14,9 @@ https://docs.docker.com/engine/reference/commandline/login/#credential-stores
 Login Succeeded
 
 docker tag falcon3-10b-inference:latest 837369895783.dkr.ecr.us-east-1.amazonaws.com/falcon3-10b-inference:latest
+
 docker images
+
 REPOSITORY                                                           TAG       IMAGE ID       CREATED          SIZE
 837369895783.dkr.ecr.us-east-1.amazonaws.com/falcon3-10b-inference   latest    1086e125886f   35 minutes ago   7.4GB
 falcon3-10b-inference                                                latest    1086e125886f   35 minutes ago   7.4GB
@@ -35,7 +38,8 @@ Add permission to the role:
     ]
 }
 
-sagemaker-user@default:~$ docker push 837369895783.dkr.ecr.us-east-1.amazonaws.com/falcon3-10b-inference:latest
+docker push 837369895783.dkr.ecr.us-east-1.amazonaws.com/falcon3-10b-inference:latest
+
 The push refers to repository [837369895783.dkr.ecr.us-east-1.amazonaws.com/falcon3-10b-inference]
 ecb610846dc8: Pushed 
 3addcb90c002: Pushed 
