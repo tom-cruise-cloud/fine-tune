@@ -4,6 +4,11 @@ aws ec2 create-subnet --vpc-id $vpcid --cidr-block 10.0.1.0/24 --availability-zo
 aws ec2 create-subnet --vpc-id $vpcid --cidr-block 10.0.2.0/24 --availability-zone us-east-1b --query Subnet.SubnetId --output text
 aws ec2 create-subnet --vpc-id $vpcid --cidr-block 10.0.3.0/24 --availability-zone us-east-1c --query Subnet.SubnetId --output text
 
+Create domain
+
+QuickSetupDomain-20251105T154843 - App Configurations - Enable docker on this domain
+
+Domains - User profiles - Execution role
 
 docker build --network sagemaker -t falcon3-10b-inference .
 
