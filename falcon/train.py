@@ -115,7 +115,8 @@ data = [
 ]
 
 # model_dir = "Qwen/Qwen2-7B-Instruct"
-model_dir = "tiiuae/Falcon3-7B-Instruct"
+model_dir = "Qwen/Qwen3-8B"
+# model_dir = "tiiuae/Falcon3-7B-Instruct"
 # model_dir = "MiniMaxAI/MiniMax-M1-80k"
 # model_dir = "Qwen/Qwen3-4B-Instruct-2507"
 # model_dir = "tiiuae/Falcon3-10B-Instruct"
