@@ -11,10 +11,13 @@ QuickSetupDomain-20251105T154843 - App Configurations - Enable docker on this do
 Domains - User profiles - Execution role
 
 docker build --network sagemaker -t falcon3-10b-inference .
-
 docker build --network sagemaker -t qwen3-8b-inference .
 
 docker run --network sagemaker falcon3-10b-inference
+docker run --network sagemaker qwen3-8b-inference
+
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8080/ping
+
 
 docker rmi 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:latest
 Untagged: 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:latest
