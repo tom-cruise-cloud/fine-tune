@@ -12,6 +12,8 @@ Domains - User profiles - Execution role
 
 docker build --network sagemaker -t falcon3-10b-inference .
 
+docker build --network sagemaker -t qwen3-8b-inference .
+
 docker run --network sagemaker falcon3-10b-inference
 
 docker rmi 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:latest
