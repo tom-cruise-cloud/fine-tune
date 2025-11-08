@@ -18,6 +18,8 @@ docker run --network sagemaker qwen3-8b-inference
 
 curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8080/ping
 
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8080/invocations -d '{"role": "user", "content": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK"}'
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8080/invocations -d '[{"role": "user", "content": "2 123456789010 eni-1235b8ca123456789 172.31.9.69 172.31.9.12 49761 3389 6 20 4249 1418530010 1418530070 REJECT OK"}]'
 
 docker rmi 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:latest
 Untagged: 837369895783.dkr.ecr.region.amazonaws.com/falcon3-10b-inference:latest
