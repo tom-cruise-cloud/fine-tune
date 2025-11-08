@@ -35,6 +35,9 @@ Login Succeeded
 docker tag falcon3-10b-inference:latest 837369895783.dkr.ecr.us-east-1.amazonaws.com/falcon3-10b-inference:latest
 docker tag qwen3-8b-inference:latest 837369895783.dkr.ecr.us-east-1.amazonaws.com/qwen3-8b-inference:latest
 
+Add ECR permission to the role:
+arn:aws:iam::837369895783:role/service-role/AmazonSageMaker-ExecutionRole-20251105T154844
+
 docker push 837369895783.dkr.ecr.us-east-1.amazonaws.com/qwen3-8b-inference:latest
 
 docker images
