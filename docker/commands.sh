@@ -33,6 +33,9 @@ https://docs.docker.com/engine/reference/commandline/login/#credential-stores
 Login Succeeded
 
 docker tag falcon3-10b-inference:latest 837369895783.dkr.ecr.us-east-1.amazonaws.com/falcon3-10b-inference:latest
+docker tag qwen3-8b-inference:latest 837369895783.dkr.ecr.us-east-1.amazonaws.com/qwen3-8b-inference:latest
+
+docker push 837369895783.dkr.ecr.us-east-1.amazonaws.com/qwen3-8b-inference:latest
 
 docker images
 
